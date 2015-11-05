@@ -1,12 +1,15 @@
 
-''' Configuration settings for the Bridge backend webservices. '''
+''' Configuration settings for the OCW backend webservices. '''
+
+# Directory where all results are save/cache-ing is done
+WORK_DIR = '/tmp/ocw/'
 
 # Parent directory that the frontend is allowed to load files from.
 # Any directory under this will be visible to the frontend.
-ARCHIVE_PATH_LEADER = '/Users/skhudiky/workspace/Nano-code/nanograv-pipeline/data/archive/'
-JOBS_PATH_LEADER = '/Users/skhudiky/workspace/Nano-code/nanograv-pipeline/data/jobs/'
+ARCHIVE_PATH_LEADER = '/usr/local/nanograv-pipeline/data/archive/'
+JOBS_PATH_LEADER = '/usr/local/nanograv-pipeline/data/jobs/'
 
 # Path to the python script for starting residual plotting workflow
-RES_SCRIPT = '/Users/skhudiky/workspace/Nano-code/nanograv-pipeline/pge/bin/runPulsarAnalysis.py'
-OS_SCRIPT = '/Users/skhudiky/workspace/Nano-code/nanograv-pipeline/pge/bin/runBridgeAnalysis.py'
-FSTAT_SCRIPT = '/Users/skhudiky/workspace/Nano-code/nanograv-pipeline/pge/bin/runFstatAnalysis.py'
+RES_SCRIPT = '/usr/local/nanograv-pipeline/pge/bin/runPulsarAnalysis.py'
+OS_SCRIPT = '/usr/local/nanograv-pipeline/pge/bin/runBridgeAnalysis.py'
+FSTAT_SCRIPT = '/usr/local/Nano-code/nanograv-pipeline/pge/bin/runFstatAnalysis.py'

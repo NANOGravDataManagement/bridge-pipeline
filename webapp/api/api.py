@@ -21,14 +21,18 @@ def get_resource(path):
 @app.route('/api/analysis/<formData>')
 def engage_analysis_workflow(formData): 
     formObj = json.loads(formData)
+    print formObj
+    print "the_form_object"
     session_id = formObj['session_id']
     analysis = formObj['analysis']
+    email = formObj['email_text']
     other_keys = []
 
     if analysis == 'OS':
         command = [ 'python' ,OS_SCRIPT
                 # ,'--pulsar' ,str(pulsars)
-                ,'--dataset' ,'nanograv5' 
+                ,'--dataset' ,'nanograv5'
+		,'--email' ,str(email) 
                 ,'-s' ,str(session_id)
             ]
     elif analysis == 'Fstat':
@@ -146,7 +150,8 @@ def get_os(session_data):
         os_path=[]
         data={}
         formObj = json.loads(session_data)
-        session_id = formObj['session_id']
+        print formObj
+        session_id = formObj['session_id'].rstrip()
         if formObj['analysis'] == 'OS' :
             session_stat_dir = session_id+'/optimal_stat/'
         elif formObj['analysis'] == 'Fstat' :
@@ -274,5 +279,5 @@ def _get_clean_directory_path(path_leader, dir_path):
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
-    # app.run(host='0.0.0.0', port=9880)
+    #app.run()
+    app.run(host='0.0.0.0', port=9880)
