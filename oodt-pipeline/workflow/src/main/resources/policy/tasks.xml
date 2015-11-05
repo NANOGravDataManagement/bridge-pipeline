@@ -88,6 +88,27 @@
         <metfield name="DATASET"/>
     </requiredMetFields>
    </task>
+<!-- Email Result Task -->
+    <task id="urn:oodt:EmailAnalysis_PGETask" name="EmailAnalysis_PGETask" class="org.apache.oodt.cas.pge.StdPGETaskInstance">
+     <conditions/>
+     <configuration>
+        <property name="PGETask_Name"           value="EmailAnalysis_PGETask"/>
+        <property name="PGETask_ConfigFilePath" value="[PGE_HOME]/policy/email-analysis-pge-config.xml" envReplace="true"/>
+        <property name="PGETask_DumpMetadata"   value="true"/>
+        <property name="PCS_WorkflowManagerUrl" value="[WORKFLOW_URL]" envReplace="true" />
+        <property name="PCS_FileManagerUrl"     value="[FILEMGR_URL]" envReplace="true"/>
+        <property name="PCS_MetFileExtension"   value="met"/>
+        <property name="PGE_HOME"               value="[PGE_HOME]" envReplace="true"/>
+        <property name="TEMPO2_PATH"            value="/usr/share/tempo2"/>
+        <property name="ARCHIVE_HOME"           value="[NANO_ARCHIVE_HOME]"/>
+        <property name="PCS_ClientTransferServiceFactory" value="org.apache.oodt.cas.filemgr.datatransfer.LocalDataTransferFactory"/>
+     </configuration>
+     <requiredMetFields>
+        <metfield name="TEMP_SESSION"/>
+        <metfield name="DATASET"/>
+        <metfield name="EMAIL"/>
+    </requiredMetFields>
+   </task>
 
 
 <!-- F-Stat Task -->

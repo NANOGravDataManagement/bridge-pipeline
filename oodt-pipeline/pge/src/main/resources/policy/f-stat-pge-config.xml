@@ -1,43 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pgeConfig>
+# runPulsarAnalysis.py
+#
+# IMPORTANT:
+#   call this script like this: 
+#	python runBridgeAnalysis --dataset nanograv5 -s ####
+#
+#
+import argparse
+from subprocess import Popen, PIPE
 
-  <!-- How to run the PGE -->
-  <exe dir="[JobDir]" shell="/bin/bash">
-<!--     <cmd>echo "**** Begin PAL2 Fstat workflow task for pulsar: [PULSAR] ****"</cmd>
- -->    <cmd>echo "**** Begin running python PAL2 script. Output directory: [FstatOutputDir]"</cmd>
-    <cmd>echo "PAL2 CW F-stat PGE Output file: [FstatPGEPGEoutput]"</cmd>
-    <cmd>python [BridgePAL2] --partim [FilteredDatasetDir]/ --outdir [FstatOutputDir] --pulsar all --pta [DATASET] --pipeline Fstat > [FstatPGEPGEoutput]</cmd>
-  </exe>
+#wmgr_client_path = '/Users/skhudiky/workspace/Nano-code/nanograv-pipeline/workflow/bin/wmgr-client'
+wmgr_client_path = '/usr/local/nanograv-pipeline/workflow/bin/wmgr-client'
 
-  <!-- Files to ingest -->
-  <output>
-  </output>
 
-  <!-- Custom metadata to add to output files -->
-  <customMetadata>
-    <!-- helpful keys -->
-    <metadata key="LessThan" val="&#x3C;"/>
-    <metadata key="LessThanOrEqualTo" val="[LessThan]="/>
-    <metadata key="GreaterThan" val="&#x3E;"/>
-    <metadata key="GreaterThanOrEqualTo" val="[GreaterThan]="/>
-    <metadata key="Exclamation" val="&#33;"/>
-    <metadata key="Ampersand" val="&#38;"/>
-    <metadata key="NotEqualTo" val="[Ampersand]="/>
-    <metadata key="LogicalAnd" val="[Ampersand][Ampersand]"/>
-    <metadata key="CshPipeToStdOutAndError" val="[GreaterThan][Ampersand][Exclamation]"/>
+parser = argparse.ArgumentParser(description='Process pulsar analysis.')
+#parser.add_argument('--pulsar',  type=str, dest='pulsars', required=True, help='names of pulsars to use')
+parser.add_argument('--dataset', type=str, dest='dataset', required=True, help='directory name for specified pulsar')
+parser.add_argument('-s', '--temp_session', type=int, 	help='a temporary session id to keep track of user data (value ranges 10000:99999; default: 12345)', default="12345")
 
-    <!--specific keys -->
-    <metadata key="ProductionDateTime"  val="[DATE.UTC]"/>
-    <metadata key="DateMilis"           val="[DATE_TO_MILLIS([ProductionDateTime],UTC_FORMAT,1970-01-01)]"/>
-    <metadata key="SessionDir"          val="[NANO_DATA_HOME]/jobs/[TEMP_SESSION]"/>
-    <metadata key="JobDir"              val="[SessionDir]/[ProductionDateTime]"/>
-    <metadata key="FstatOutputDir"      val="[SessionDir]/f_stat"/>
-    <metadata key="FilteredDatasetDir"  val="[SessionDir]/session_data"/>
-    <metadata key="PulsarDir"           val="[ARCHIVE_HOME]/[DATASET]"/>
-    <metadata key="BridgePAL2"          val="[PGE_HOME]/bin/bridge/gw_analysis/run_GW_pipeline.py"/>
-    <metadata key="FstatPGEPGEoutput"   val="[JobDir]/FstatPGE-[DateMilis].output.txt"/>
 
-  </customMetadata>
+# Set arguments to appropriate variable
+args = parser.parse_args()
+#str_list = args.pulsars.split(',')
+#pulsars = filter(None, str_list)
+dataset = args.dataset
 
-</pgeConfig>
-  
+# Get temporary session id to keep track of what data belongs to what run
+temp_session = args.temp_session
+if not (temp_session) : temp_session = '12345'
+
+
+# Loop through list of pulsars to send event to run workflow
+#for pulsar in pulsars :
+	# Set the command to run with all parameters
+command = [ wmgr_client_path
+		,'--url' ,'http://localhost:9103' ,'--operation' ,'--sendEvent' 
+		,'--eventName' ,'FStat_Event' ,'--metaData'
+#		,'--key' ,'PULSAR' , pulsar
+		,'--key' ,'DATASET' , dataset
+		,'--key' ,'TEMP_SESSION' , str(temp_session)
+	]
+# command += other_keys
+output = Popen(command, stdout=PIPE, stderr=PIPE)
+stdout, stderr = output.communicate()
+if stdout.find('error') > 0 :
+	print stdout.find('error')
+	# break
+
+print temp_session
