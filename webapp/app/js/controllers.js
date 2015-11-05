@@ -1,7 +1,6 @@
 var bridgeControllers = angular.module('bridgeControllers', []);
 
 var api_url = 'http://thebridge.phys.wvu.edu/api';
-var api_url = 'http://127.0.0.1:5000/api';
 
 bridgeControllers.controller('testCont', ['$scope', '$http', function($scope, $http) {
 	$scope.os_pdf = '92408/optimal_stat/hd.pdf';
@@ -22,10 +21,15 @@ bridgeControllers.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '
 }]);
 
 
-bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location', '$anchorScroll', '$modal', '$log',
- function($scope, $http, $location, $anchorScroll,$modal, $log) {
+bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location', '$anchorScroll', '$modal', '$log', 
+ function($scope, $http, $location, $anchorScroll, $modal, $log) {
 
   $scope.animationsEnabled = true;
+
+  $scope.mySplit = function(number) {
+    //$scope.array = string.split(',');
+    return $scope.result = Math.round( number );
+  }
 
   $scope.open = function (pulsar) {
 
@@ -68,7 +72,7 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 	$scope.hide_loading_analysis = true;
 	$scope.hide_analysis_results = true;
 	$scope.hide_pulsar_section = false;
-
+        $scope.email_text = "";
 
 	// GET nanograv5 dataset and set as default
 	$http.get(api_url+'/list/nanograv5').success(function(data) {
@@ -148,13 +152,14 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 				$scope.aData['analysis'] = 'OS';	
 				// If all information is submitted correctly, stringify information to send to API
 				var analysisData = JSON.stringify($scope.aData);
-
+				console.log(analysisData)
+                                console.log("before I get plots")
 				// Call engage from API
-				$http.get(api_url+'/analysis/'+analysisData).success(function(data) {
-					$scope.sessionID = data;
-				});
+				//$http.get(api_url+'/analysis/'+analysisData).success(function(data) {
+				//	$scope.sessionID = data;
+				//});
 				// Set timeout for processing plots
-				setTimeout(function(){
+				setInterval(function(){
 					// Once session id is returned, gather plots to display
 					$http.get(api_url+'/get/plots/'+$scope.sessionID).success(function(data) {
 						$scope.plots = data['plot_data'];
@@ -210,15 +215,21 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 			$scope.hide_loading_analysis = false;
 			// If all information is submitted correctly, stringify information to send to API
 			$scope.aData = {}
-			$scope.aData['session_id'] = $scope.sessionID;
+			$scope.aData['session_id'] = $scope.sessionID.replace(/\s/g, '');
 
 			analysis = $scope.analysis;
+                        email_text = $scope.email_text;
 			$scope.aData['analysis'] = analysis;	
+                        $scope.aData['email_text'] = email_text;
 			var analysisData = JSON.stringify($scope.aData);
+                        console.log(analysis);
 			if (analysis == 'OS') {
 				// Call engage from API
+				console.log(api_url);
+                                console.log(analysisData);
 				$http.get(api_url+'/analysis/'+analysisData).success(function(data) {
-					$scope.sessionID = data;	
+					$scope.sessionID = data;
+                                         console.log(data);	
 					// Set timeout for processing plots
 					setTimeout(function(){
 						$http.get(api_url+'/get/analysis_data/'+analysisData).success(function(data) {
@@ -249,7 +260,17 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
   };
 }]);
 
+bridgeControllers.controller('59698Controller', ['$scope', '$http', 
+function($scope, $http) {
+	 $scope.items = [];  
+	 $http.get('http://thebridge.phys.wvu.edu/api/82239/optimal_stat/os_out.json').success(function(data) {
+	 	$scope.items = data;
+                console.log($scope.items)
+	 });
+ }]);
+
+bridgeControllers.controller('HelpController', ['$scope', '$http',
+ function($scope, $http) {  }]);
 
 bridgeControllers.controller('AboutController', ['$scope', '$http',
  function($scope, $http) {  }]);
-

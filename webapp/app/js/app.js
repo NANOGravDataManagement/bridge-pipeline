@@ -10,6 +10,18 @@ myApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/analysis.html',
     controller: 'AnalysisController'
   }).
+  when('/help', {
+    templateUrl: 'partials/help.html',
+    controller: 'HelpController'
+  }).
+  when('/59698', {
+    templateUrl: 'partials/59698.html',
+    controller: '59698Controller'
+  }).
+  when('/mostrecent', {
+    templateUrl: 'partials/mostrecent.html',
+    controller: '59698Controller'
+  }).
   when('/about', {
     templateUrl: 'partials/about.html',
     controller: 'AboutController'
