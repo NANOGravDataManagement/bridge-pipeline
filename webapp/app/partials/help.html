@@ -1,0 +1,310 @@
+<!-- Help page 
+  This application is using Angular JS
+-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/about">NanoGrav</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navbar">
+			<ul class="nav navbar-nav">
+				<li><a href="#/about">Home <span class="sr-only">(current)</span></a></li>
+				<li><a href="#/analysis">Analysis <span class="sr-only">(current)</span></a></li>
+				<li class="active"><a href="#/help">Help <span class="sr-only">(current)</span></a></li>
+				<li><a href="#/mostrecent">Most Recent Stochastic Background Results <span class="sr-only">(current)</span></a></li>
+			</ul>
+		</div>
+	</div>
+</nav>	
+
+<div class="view-body container-fluid">
+	<br>
+	<div class="row col-md-offset-1 col-md-8 summary">
+		<h4><font color="6C1919" size="18px">Help section</font></h4>
+		<div class="row col-md-8 border-left">
+		<hr>
+			<p class="introduction">
+			In this section we are going to explain what does the data in .par and .tim files represent. A tim file refers to arrival time file. It is an observation file and contains the pulsar arrival time at the observatory.
+			</p>
+			<p style="font-size:18px"><font color="6C1919"><strong>Example of a NANOGrav 5-year data .tim file (J0030+0451 pulsar)</font></strong></p>
+			<p class="introduction">
+			Here is a row from the J0030+0451 pulsar .tim file. We are going to explain what each column represents:
+			<p><strong>53358.000077.3.000.000.tsum &nbsp;420.000 &nbsp;53358.9598798347905 &nbsp;1.820 ao -fe 430G -be ASP -B 430 -bw 4.0 -tobs 2401.070 -pta NANOGrav -proc dfg+12 -chanid asp_420</strong></p>
+			<table style="height: 256px;" width="550" border="1" align="center">
+			<tbody>
+			<tr align = "center">
+			<td height="35"><strong>.tim file column</strong></td>
+			<td height="35"><strong>Explanation</strong></td>
+			</tr>
+			<tr align = "center">
+			<td height="35">53358.000077.3.000.000.tsum</td>
+			<td height="35">53358' refers to the pulsar file name. '3' refers to the observatory number</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">420.000</td>
+			<td height="35">observing frequency in MHz</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">53358.9598798347905</td>
+			<td height="35">measured TOA (Time of Arrival at the observatory)</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">1.820</td>
+			<td height="35">error in microseconds</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">ao</td>
+			<td height="35">radiotelescope used for observation ('ao' = Arecibo Observatory)</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">-fe</td>
+			<td height="35">front-end of the receiver</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">430G</td>
+			<td height="35">430 MHz Gregorian</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">-be</td>
+			<td height="35">back-end of the receiver</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">ASP</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">-B</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">430</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">-bw</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">4.0</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">-tobs</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">2401.070</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">-pta</td>
+			<td height="35">Pulsar Timing Array</td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">dfg+12</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">-chanid</td>
+			<td height="35"></td>
+			</tr>
+			</tr>
+			<tr align = "center">
+			<td height="35">asp_420</td>
+			<td height="35"></td>
+			</tr>
+			</tbody>
+			</table>
+			<strong>CAUTION:</strong> Different data sets often have a different order of columns.
+
+			<p style="font-size:18px"><font color="6C1919"><strong>Example of a NANOGrav 5-year data .par file (J0030+0451 pulsar)</font></strong></p>
+			<p class="introduction">
+			Here is a Pulsar Parameter Table where we will explain what each abbreviation represents.
+			</p>
+			<table style="height: 256px;" width="550" border="1" align="center">
+			<tbody>
+			<tr align = "center">
+			<td height="35"><strong>Parameters</strong></td>
+			<td height="35"><strong>Definition</strong></td>
+			<td height="35"><strong>Unit</strong></td>
+			</tr>
+			<tr align = "center">
+			<td height="35">PSR/J/B</td>
+			<td height="35">Pulsar Name</td>
+			<td height="35">&nbsp;</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">ELONG</td>
+			<td height="35">Ecliptic Longitude</td>
+			<td height="35">degrees</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">ELAT</td>
+			<td height="35">Ecliptic Latitude</td>
+			<td height="35">degrees</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">F0, F1,.. FX</td>
+			<td height="35">Xth time derivative of rotational period</td>
+			<td height="35">sec^{-(x-1)}</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">PEPOCH</td>
+			<td height="35">Epoch of Period Determination</td>
+			<td height="35">MJD</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">POSEPOCH</td>
+			<td height="35">Epoch of Position Measurement</td>
+			<td height="35">MJD</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">DMEPOCH</td>
+			<td height="35">Epoch of DM Measurement</td>
+			<td height="35">MJD</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">DM</td>
+			<td height="35">Dispersion Measure</td>
+			<td height="35">cm^(-3)*pc</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">DMX</td>
+			<td height="35">Xth Derivative of Dispersion Measure</td>
+			<td height="35">cm^(-3)*pc*yr^(-x)</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">PMELONG</td>
+			<td height="35">Proper Motion in Ecliptic Longitude</td>
+			<td height="35">mas/yr</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">PMELAT</td>
+			<td height="35">Proper Motion in Ecliptic Latitude</td>
+			<td height="35">mas/yr</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">PX</td>
+			<td height="35">Parallax</td>
+			<td height="35">mas</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">START</td>
+			<td height="35">Starting year (MJD) of data recording</td>
+			<td height="35">MJD</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">FINISH</td>
+			<td height="35">&nbsp;</td>
+			<td height="35">MJD</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">TZRMJD</td>
+			<td height="35">Prediction Mode Only</td>
+			<td height="35">&nbsp;</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">TZRSITE</td>
+			<td height="35">Prediction Mode Only</td>
+			<td height="35">&nbsp;</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">&nbsp;RAJ</td>
+			<td height="35">&nbsp;J2000 right ascension&nbsp;</td>
+			<td height="35">&nbsp;hh.mm.ss</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">&nbsp;DECJ</td>
+			<td height="35">&nbsp;J2000 declination&nbsp;</td>
+			<td height="35">&nbsp;dd.mm.ss</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">PMRA</td>
+			<td height="35">Proper Motion in RA</td>
+			<td height="35">mas/yr</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">PMDEC</td>
+			<td height="35">Proper Motion in DEC</td>
+			<td height="35">mas/yr</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">SINI</td>
+			<td height="35">sine of inclination angle</td>
+			<td height="35">&nbsp;</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">BINARY</td>
+			<td height="35">Binary model</td>
+			<td height="35">&nbsp;</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">PB</td>
+			<td height="35">Orbital Period</td>
+			<td height="35">days</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">T0</td>
+			<td height="35">Epoch of periastron</td>
+			<td height="35">MJD</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">A1</td>
+			<td height="35">semi-major axis of the orbit</td>
+			<td height="35">sec</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">OM</td>
+			<td height="35">Longitude of periastron&nbsp;</td>
+			<td height="35">degree</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">ECC</td>
+			<td height="35">Eccentricity</td>
+			<td height="35">&nbsp;</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">M2</td>
+			<td height="35">Companion Mass</td>
+			<td height="35">1 solar mass&nbsp;</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">DMXR</td>
+			<td height="35">time range between two DMXs</td>
+			<td height="35">&nbsp;</td>
+			</tr>
+			<tr align = "center">
+			<td height="35">JUMP</td>
+			<td height="35">offset between two sets of TOAs</td>
+			<td height="35">&nbsp;</td>
+			</tr>
+			</tbody>
+			</table>
+			<p>
+
+
+
+
+
+			</p>
+
+		</div>
+	</div>
+</div>
