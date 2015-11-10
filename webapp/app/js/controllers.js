@@ -24,11 +24,18 @@ bridgeControllers.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '
 bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location', '$anchorScroll', '$modal', '$log', 
  function($scope, $http, $location, $anchorScroll, $modal, $log) {
 
+  var alertt = true;
   $scope.animationsEnabled = true;
 
   $scope.mySplit = function(number) {
     //$scope.array = string.split(',');
     return $scope.result = Math.round( number );
+  }
+
+  $scope.myAlert = function() {
+    //$scope.array = string.split(',');
+    if( !alertt ) alert("Your analysis results will be sent to "+$scope.email_text+" within 24 hours. Thank you for using The Bridge!");
+    alertt = true;
   }
 
   $scope.open = function (pulsar) {
@@ -72,7 +79,7 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 	$scope.hide_loading_analysis = true;
 	$scope.hide_analysis_results = true;
 	$scope.hide_pulsar_section = false;
-        $scope.email_text = "";
+    $scope.email_text = "";
 
 	// GET nanograv5 dataset and set as default
 	$http.get(api_url+'/list/nanograv5').success(function(data) {
@@ -206,10 +213,11 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 			&& jQuery.isEmptyObject($scope.formData['nanograv9']) ) {
 			alert( 'Please select at least one product to engage!');
 		} else {
+
 //			$location.hash('analysisResults');
 //			// call $anchorScroll()
 //			$anchorScroll();
-
+			alertt = false;
 			// show loading and analysis section
 			$scope.hide_analysis_section = false;
 			$scope.hide_loading_analysis = false;
@@ -218,9 +226,9 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 			$scope.aData['session_id'] = $scope.sessionID.replace(/\s/g, '');
 
 			analysis = $scope.analysis;
-                        email_text = $scope.email_text;
+            email_text = $scope.email_text;
 			$scope.aData['analysis'] = analysis;	
-                        $scope.aData['email_text'] = email_text;
+            $scope.aData['email_text'] = email_text; 
 			var analysisData = JSON.stringify($scope.aData);
                         console.log(analysis);
 			if (analysis == 'OS') {
@@ -265,8 +273,12 @@ function($scope, $http) {
 	 $scope.items = [];  
 	 $http.get('http://thebridge.phys.wvu.edu/api/82239/optimal_stat/os_out.json').success(function(data) {
 	 	$scope.items = data;
-                console.log($scope.items)
+        console.log($scope.items);
 	 });
+  $scope.mySplit = function(number) {
+    //$scope.array = string.split(',');
+    return $scope.result = parseFloat(number).toPrecision(3);
+  }
  }]);
 
 bridgeControllers.controller('HelpController', ['$scope', '$http',
