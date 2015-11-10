@@ -18,6 +18,14 @@ myApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/mostrecent.html',
     controller: '59698Controller'
   }).
+  when('/CW', {
+    templateUrl: 'partials/CW.html',
+    controller: '59698Controller'
+  }).
+  when('/credit', {
+    templateUrl: 'partials/credit.html',
+    controller: '59698Controller'
+  }).
   when('/about', {
     templateUrl: 'partials/about.html',
     controller: 'AboutController'
