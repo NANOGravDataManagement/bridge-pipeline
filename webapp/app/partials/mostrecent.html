@@ -1,0 +1,57 @@
+<!-- Help page 
+  This application is using Angular JS
+-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/about">NanoGrav</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navbar">
+			<ul class="nav navbar-nav">
+				<li><a href="#/about">Home <span class="sr-only">(current)</span></a></li>
+				<li><a href="#/analysis">Analysis <span class="sr-only">(current)</span></a></li>
+				<li><a href="#/help">Help <span class="sr-only">(current)</span></a></li>
+				<li class="active"><a href="#/mostrecent">Most Recent Stochastic Background Results <span class="sr-only">(current)</span></a></li>
+			</ul>
+		</div>
+	</div>
+</nav>	
+
+<div class="view-body container-fluid">
+	<br>
+	<div class="row col-md-offset-1 col-md-8 summary">
+		<h4><font color="6C1919" size="18px">Most Recent Stochastic Background Results</font></h4>
+		<div class="row col-md-8 border-left">
+		<hr>
+			<p class="introduction">
+			Two plots will appear below, both with the angular separation between the pulsars on the horizontal axis. The upper plot is the cross-correlated power for the selected data sets. Please see <a href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:1410.8256">Chamberlin et al. (2014)</a> for more information. The lower plot is a histogram of the pulsar pairs (red) and the pulsar pairs weighted by their cross-correlation value (blue) as a function of angular separation, respectively. The two numbers that are displayed below the table are the most likely amplitude of the stochastic gravitational wave background and the signal-to-noise ratio of that signal.
+			<p>
+			</p>
+ 			<table border="1" align="center">
+ 				<tbody>
+					<tr>
+						<td style="text-align: center;"><strong>A_gw</strong></td>
+						<td style="text-align: center;"><strong>SNR</strong></td>
+						<td style="text-align: center;"><strong>A_95</strong></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">&nbsp;{{mySplit(items.A_gw)}}&nbsp;</td>
+						<td style="text-align: center;">&nbsp;{{mySplit(items.SNR)}}&nbsp;</td>
+						<td style="text-align: center;">&nbsp;{{mySplit(items.A_95)}}&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			</p>
+			<img style="float: center;" src="http://thebridge.phys.wvu.edu/api/82239/optimal_stat/hd.png" alt="Pulsar J0613-0200" width="781" height="786" />
+
+		</div>
+	</div>
+</div>
