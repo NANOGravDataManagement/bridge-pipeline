@@ -14,10 +14,6 @@ myApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/help.html',
     controller: 'HelpController'
   }).
-  when('/59698', {
-    templateUrl: 'partials/59698.html',
-    controller: '59698Controller'
-  }).
   when('/mostrecent', {
     templateUrl: 'partials/mostrecent.html',
     controller: '59698Controller'
