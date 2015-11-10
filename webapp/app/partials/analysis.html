@@ -126,7 +126,7 @@
 						<hr>
 						<h4>Step 2: Perform analysis </h4>
 						<div>
-                                                        <input type="email" ng-model="email_text" required></br>
+							<input type="email" ng-model="email_text" required></br>
 							<input type="radio" ng-model="analysis" value="OS">  Optimal Statistic<br>
 							<input type="radio" ng-model="analysis" value="Fstat">  CW F-statistic <br>
 							<input type="radio" ng-model="analysis" value="bay" disabled>  Bayesian <br> 
@@ -135,14 +135,14 @@
 				</div>
 
 				<p class="text-right">
-					<button class="btn btn-large btn-primary" id="engage" type="submit" ng-disabled="processAnalysis.$infalid" ng-hide="hide_engage">
+					<button class="btn btn-large btn-primary" id="engage" type="submit" ng-disabled="disable_engage" ng-hide="hide_engage">
 						<span class="glyphicon glyphicon-flash"></span> Engage!</button>
 				</p>
 			</form>
-			<form name="processAnalysis" ng-submit="processAnalysis()">
+			<form  ng-submit="processAnalysis()">
 				<p class="text-right">
 					<!-- <a href="#analysisResults"> -->
-						<button class="btn btn-large btn-primary" id="engage_analysis" type="submit" ng-disabled="processAnalys" ng-hide="hide_engage_analysis">
+						<button class="btn btn-large btn-primary" id="engage_analysis" type="submit" ng-disabled="disable_analysis_engage" ng-hide="hide_engage_analysis">
 						<span class="glyphicon glyphicon-flash"></span> Engage Analysis!</button>
 					<!-- </a> -->
 				</p>
@@ -201,9 +201,10 @@
 <!-- Response to "Engage Analysis" button -->
 				<div id="analysisResults" class="col-md-12" ng-hide="hide_analysis_section">
 					<hr/>
-					<img ng-src="img/ajax-loader.gif" alt="Loading..." ng-hide="hide_loading_analysis"/>
+					<!-- <img ng-src="img/ajax-loader.gif" alt="Loading..." ng-hide="hide_loading_analysis"/> -->
 					<div ng-hide="hide_analysis_results">
 						<h3> {{analysis_title}} Results </h3> 
+						{{ myAlert() }}
 						<div class="text-center" ng-repeat="(key, value) in analysis_data">				
 	 						<!-- <span ng-repeat="r in result"> {{r}}</span> -->
 	 						<table>
