@@ -271,7 +271,7 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 bridgeControllers.controller('59698Controller', ['$scope', '$http', 
 function($scope, $http) {
 	 $scope.items = [];  
-	 $http.get('http://thebridge.phys.wvu.edu/api/82239/optimal_stat/os_out.json').success(function(data) {
+	 $http.get('http://thebridge.phys.wvu.edu/api/7777/optimal_stat/os_out.json').success(function(data) {
 	 	$scope.items = data;
         console.log($scope.items);
 	 });
