@@ -36,7 +36,7 @@
 						<h4>Step 1: Select pulsars to analyse </h4>
 
 						<accordion close-others="oneAtATime">
-							<accordion-group is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+							<accordion-group>
 							<accordion-heading>5 Year Data<i class="pull-right glyphicon" 
 							ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
 							</i></accordion-heading>
@@ -64,16 +64,13 @@
 							<accordion-heading>PPTA Data<i class="pull-right glyphicon" 
 							ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
 							</i></accordion-heading>
-							<p>Data coming soon!</p>
-					    <!-- <ul class="list-group">
-					    	<li class="list-group-item pulsars" ng-repeat="item in nanograv9">
-								<input type="checkbox" checked="checked" class="box"/> {{item}} </input>
-								</li>
-							</ul> -->
+								<ul class="list-group">
+									<span id="selectallPPTA" ng-click="toggleSeleted(pptadr1,'pptadr1')"><u><b>{{selectText['pptadr1']}}</b></u></span>
+									<li class="list-group-item pulsars" ng-repeat="product in pptadr1">
+									<input type="checkbox" value="{{product.id}}" ng-checked='product.checked' ng-model="product.checked"/> {{product.name}} </input>
+									</li>
+								</ul>
 							</accordion-group>
-						   <!--  <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-						      {{group.list}}
-						    </accordion-group> -->
 					  </accordion>
 					</div>
 					<hr/>
@@ -139,14 +136,14 @@
 
 				<p class="text-right">
 					<button class="btn btn-large btn-primary" id="engage" type="submit" ng-disabled="disable_engage" ng-hide="hide_engage">
-						<span class="glyphicon glyphicon-flash"></span> Engage!</button>
+						<span class="glyphicon glyphicon-flash"></span> Get Residuals!</button>
 				</p>
 			</form>
 			<form  ng-submit="processAnalysis()">
 				<p class="text-right">
 					<!-- <a href="#analysisResults"> -->
 						<button class="btn btn-large btn-primary" id="engage_analysis" type="submit" ng-disabled="disable_analysis_engage" ng-hide="hide_engage_analysis">
-						<span class="glyphicon glyphicon-flash"></span> Engage Analysis!</button>
+						<span class="glyphicon glyphicon-flash"></span> Search for Gravitational Waves!</button>
 					<!-- </a> -->
 				</p>
 			</form>	
