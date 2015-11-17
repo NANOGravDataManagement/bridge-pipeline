@@ -67,7 +67,7 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 	$scope.api_url = api_url;
 	// Initialize data with default values
 	$scope.allSelected 	= {"nanograv5": true,"nanograv9": false, "pptadr1": false};
-	$scope.selectText 	= {"nanograv5": "Deselect All","nanograv9": "Select All", "ppta": "Select All"};
+	$scope.selectText 	= {"nanograv5": "Deselect All","nanograv9": "Select All", "pptadr1": "Select All"};
 	$scope.formData 	= {"timeFilter":"fullTime", "frequencyFilter":"fullFrequency", "residualPlotting":true, "pulsarTiming":false};
 	$scope.loading				  = true;
 	$scope.hide_plots		 	  = true;
@@ -95,6 +95,10 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 		$scope.nanograv9 = data['listing'];
 	});
 
+	// GET pptadr1 dataset
+	$http.get(api_url+'/list/pptadr1').success(function(data) {
+		$scope.pptadr1 = data['listing'];
+	});
 
 	/* Function that takes in dataset and datasetName in order to 
 	 * toggle which products are *all* selected or deselected in the 
@@ -125,7 +129,10 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
   	var selectedData5 = $scope.nanograv5.filter(function(data) {
       return data.checked;
     });
-		var selectedData9 = $scope.nanograv9.filter(function(data) {
+	var selectedData9 = $scope.nanograv9.filter(function(data) {
+      return data.checked;
+    });
+    var selectedDataPPTA = $scope.pptadr1.filter(function(data) {
       return data.checked;
     });
 
@@ -140,11 +147,17 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 			  return p.name;
 			});
 			$scope.formData['dataset'] = 'nanograv9';
-	  }
+	} else if (!jQuery.isEmptyObject(selectedDataPPTA)) {
+	  	$scope.formData['pptadr1'] =jQuery.map( selectedDataPPTA, function( p ) {
+			  return p.name;
+			});
+			$scope.formData['dataset'] = 'pptadr1';
+	}
 
 		// Check that user has selected at least one pulsar
 		if (jQuery.isEmptyObject($scope.formData['nanograv5']) 
-			&& jQuery.isEmptyObject($scope.formData['nanograv9']) ) {
+			&& jQuery.isEmptyObject($scope.formData['nanograv9'])
+			&& jQuery.isEmptyObject($scope.formData['pptadr1']) ) {
 			alert( 'Please select at least one product to engage!');
 		} else {
 		
@@ -188,10 +201,14 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
    * script to run OODT workflow for selected analysis.
    */
   $scope.processAnalysis = function() {
+
   	var selectedData5 = $scope.nanograv5.filter(function(data) {
       return data.checked;
     });
-		var selectedData9 = $scope.nanograv9.filter(function(data) {
+	var selectedData9 = $scope.nanograv9.filter(function(data) {
+      return data.checked;
+    });
+    var selectedDataPPTA = $scope.pptadr1.filter(function(data) {
       return data.checked;
     });
 
@@ -206,14 +223,19 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 			  return p.name;
 			});
 			$scope.formData['dataset'] = 'nanograv9';
-	 	}
+	} else if (!jQuery.isEmptyObject(selectedDataPPTA)) {
+	  	$scope.formData['pptadr1'] =jQuery.map( selectedDataPPTA, function( p ) {
+			  return p.name;
+			});
+			$scope.formData['dataset'] = 'pptadr1';
+	}
 
    	// Check that user has selected at least one pulsar
 		if (jQuery.isEmptyObject($scope.formData['nanograv5']) 
-			&& jQuery.isEmptyObject($scope.formData['nanograv9']) ) {
+			&& jQuery.isEmptyObject($scope.formData['nanograv9'])
+			&& jQuery.isEmptyObject($scope.formData['pptadr1']) ) {
 			alert( 'Please select at least one product to engage!');
 		} else {
-
 //			$location.hash('analysisResults');
 //			// call $anchorScroll()
 //			$anchorScroll();
