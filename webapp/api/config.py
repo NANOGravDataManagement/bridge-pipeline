@@ -12,4 +12,6 @@ JOBS_PATH_LEADER = '/usr/local/nanograv-pipeline/data/jobs/'
 # Path to the python script for starting residual plotting workflow
 RES_SCRIPT = '/usr/local/nanograv-pipeline/pge/bin/runPulsarAnalysis.py'
 OS_SCRIPT = '/usr/local/nanograv-pipeline/pge/bin/runBridgeAnalysis.py'
-FSTAT_SCRIPT = '/usr/local/Nano-code/nanograv-pipeline/pge/bin/runFstatAnalysis.py'
+FSTAT_SCRIPT = '/usr/local/nanograv-pipeline/pge/bin/runFstatAnalysis.py'
+BWM_SCRIPT = '/usr/local/nanograv-pipeline/pge/bin/runBWMAnalysis.py'
+

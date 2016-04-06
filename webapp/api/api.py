@@ -2,7 +2,7 @@ import re
 import os.path
 import random, json
 from flask import Flask, Response, jsonify
-from config import ARCHIVE_PATH_LEADER, JOBS_PATH_LEADER, RES_SCRIPT, OS_SCRIPT, FSTAT_SCRIPT
+from config import ARCHIVE_PATH_LEADER, JOBS_PATH_LEADER, RES_SCRIPT, OS_SCRIPT, FSTAT_SCRIPT, BWM_SCRIPT
 from flask.ext.cors import CORS
 from subprocess import Popen, PIPE
 
@@ -21,24 +21,31 @@ def get_resource(path):
 @app.route('/api/analysis/<formData>')
 def engage_analysis_workflow(formData): 
     formObj = json.loads(formData)
-    print formObj
-    print "the_form_object"
     session_id = formObj['session_id']
     analysis = formObj['analysis']
+    dataset = formObj['dataset']
+    print dataset 
     email = formObj['email_text']
     other_keys = []
 
     if analysis == 'OS':
         command = [ 'python' ,OS_SCRIPT
                 # ,'--pulsar' ,str(pulsars)
-                ,'--dataset' ,'nanograv5'
+                ,'--dataset' ,str(dataset)
 		,'--email' ,str(email) 
                 ,'-s' ,str(session_id)
             ]
     elif analysis == 'Fstat':
         command = [ 'python' ,FSTAT_SCRIPT
                 # ,'--pulsar' ,str(pulsars)
-                ,'--dataset' ,'nanograv5' 
+                ,'--dataset' , str(dataset)
+                ,'--email', str(email)
+                ,'-s' ,str(session_id)
+            ]
+    elif analysis == 'BWM':
+        command = [ 'python' ,BWM_SCRIPT
+                ,'--dataset' , str(dataset)
+                ,'--email', str(email)
                 ,'-s' ,str(session_id)
             ]
 
@@ -156,6 +163,8 @@ def get_os(session_data):
             session_stat_dir = session_id+'/optimal_stat/'
         elif formObj['analysis'] == 'Fstat' :
             session_stat_dir = session_id+'/f_stat/'
+        elif formObj['analysis'] == 'BWM' :
+            session_stat_dir = session_id+'/bwm/'
 
         complete_path = _get_clean_directory_path(JOBS_PATH_LEADER, session_stat_dir)
         dir_listing = os.listdir(complete_path)

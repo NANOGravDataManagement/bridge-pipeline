@@ -1,6 +1,6 @@
 var bridgeControllers = angular.module('bridgeControllers', []);
 
-var api_url = 'http://thebridge.phys.wvu.edu/api';
+var api_url = 'http://bridge.nanograv.org/api';
 
 bridgeControllers.controller('testCont', ['$scope', '$http', function($scope, $http) {
 	$scope.os_pdf = '92408/optimal_stat/hd.pdf';
@@ -66,8 +66,8 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 
 	$scope.api_url = api_url;
 	// Initialize data with default values
-	$scope.allSelected 	= {"nanograv5": true,"nanograv9": false, "pptadr1": false};
-	$scope.selectText 	= {"nanograv5": "Deselect All","nanograv9": "Select All", "ppta": "Select All"};
+	$scope.allSelected 	= {"nanograv5": false,"nanograv9": true, "pptadr1": false};
+	$scope.selectText 	= {"nanograv5": "Select All","nanograv9": "Deselect All", "pptadr1": "Select All"};
 	$scope.formData 	= {"timeFilter":"fullTime", "frequencyFilter":"fullFrequency", "residualPlotting":true, "pulsarTiming":false};
 	$scope.loading				  = true;
 	$scope.hide_plots		 	  = true;
@@ -79,7 +79,9 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 	$scope.hide_loading_analysis = true;
 	$scope.hide_analysis_results = true;
 	$scope.hide_pulsar_section = false;
-    $scope.email_text = "";
+	$scope.hide_pulsar_list = false;
+	$scope.analysis_requested = false;
+    	$scope.email_text = "";
 
 	// GET nanograv5 dataset and set as default
 	$http.get(api_url+'/list/nanograv5').success(function(data) {
@@ -93,8 +95,15 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 	// GET nanograv9 dataset
 	$http.get(api_url+'/list/nanograv9').success(function(data) {
 		$scope.nanograv9 = data['listing'];
+		angular.forEach($scope.nanograv9, function(product){
+			product.checked = $scope.allSelected["nanograv9"];
+                });
 	});
 
+	// GET pptadr1 dataset
+	$http.get(api_url+'/list/pptadr1').success(function(data) {
+		$scope.pptadr1 = data['listing'];
+	});
 
 	/* Function that takes in dataset and datasetName in order to 
 	 * toggle which products are *all* selected or deselected in the 
@@ -122,10 +131,14 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
   $scope.processAnalysisForm = function() {
   	$scope.loading = false;
   	$scope.disable_engage = true;
+	$scope.hide_pulsar_list = true;
   	var selectedData5 = $scope.nanograv5.filter(function(data) {
       return data.checked;
     });
-		var selectedData9 = $scope.nanograv9.filter(function(data) {
+	var selectedData9 = $scope.nanograv9.filter(function(data) {
+      return data.checked;
+    });
+    var selectedDataPPTA = $scope.pptadr1.filter(function(data) {
       return data.checked;
     });
 
@@ -140,11 +153,17 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 			  return p.name;
 			});
 			$scope.formData['dataset'] = 'nanograv9';
-	  }
+	} else if (!jQuery.isEmptyObject(selectedDataPPTA)) {
+	  	$scope.formData['pptadr1'] =jQuery.map( selectedDataPPTA, function( p ) {
+			  return p.name;
+			});
+			$scope.formData['dataset'] = 'pptadr1';
+	}
 
 		// Check that user has selected at least one pulsar
 		if (jQuery.isEmptyObject($scope.formData['nanograv5']) 
-			&& jQuery.isEmptyObject($scope.formData['nanograv9']) ) {
+			&& jQuery.isEmptyObject($scope.formData['nanograv9'])
+			&& jQuery.isEmptyObject($scope.formData['pptadr1']) ) {
 			alert( 'Please select at least one product to engage!');
 		} else {
 		
@@ -160,6 +179,7 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 				// If all information is submitted correctly, stringify information to send to API
 				var analysisData = JSON.stringify($scope.aData);
 				console.log(analysisData)
+                                console.log($scope.formData['dataset'])
                                 console.log("before I get plots")
 				// Call engage from API
 				//$http.get(api_url+'/analysis/'+analysisData).success(function(data) {
@@ -188,10 +208,17 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
    * script to run OODT workflow for selected analysis.
    */
   $scope.processAnalysis = function() {
+	$scope.analysis_requested = true;
+	$scope.hide_engage_analysis = true;
+
   	var selectedData5 = $scope.nanograv5.filter(function(data) {
       return data.checked;
     });
-		var selectedData9 = $scope.nanograv9.filter(function(data) {
+	var selectedData9 = $scope.nanograv9.filter(function(data) {
+      console.log(data.checked);
+      return data.checked;
+    });
+    var selectedDataPPTA = $scope.pptadr1.filter(function(data) {
       return data.checked;
     });
 
@@ -206,14 +233,19 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 			  return p.name;
 			});
 			$scope.formData['dataset'] = 'nanograv9';
-	 	}
+	} else if (!jQuery.isEmptyObject(selectedDataPPTA)) {
+	  	$scope.formData['pptadr1'] =jQuery.map( selectedDataPPTA, function( p ) {
+			  return p.name;
+			});
+			$scope.formData['dataset'] = 'pptadr1';
+	}
 
    	// Check that user has selected at least one pulsar
 		if (jQuery.isEmptyObject($scope.formData['nanograv5']) 
-			&& jQuery.isEmptyObject($scope.formData['nanograv9']) ) {
+			&& jQuery.isEmptyObject($scope.formData['nanograv9'])
+			&& jQuery.isEmptyObject($scope.formData['pptadr1']) ) {
 			alert( 'Please select at least one product to engage!');
 		} else {
-
 //			$location.hash('analysisResults');
 //			// call $anchorScroll()
 //			$anchorScroll();
@@ -226,9 +258,10 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 			$scope.aData['session_id'] = $scope.sessionID.replace(/\s/g, '');
 
 			analysis = $scope.analysis;
-            email_text = $scope.email_text;
+            		email_text = $scope.email_text;
 			$scope.aData['analysis'] = analysis;	
-            $scope.aData['email_text'] = email_text; 
+			$scope.aData['dataset'] = $scope.formData['dataset'];
+            		$scope.aData['email_text'] = email_text; 
 			var analysisData = JSON.stringify($scope.aData);
                         console.log(analysis);
 			if (analysis == 'OS') {
@@ -263,6 +296,23 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 						});
 					}, 8000);
 				});
+B
+
+			} else if (analysis == 'BWM') {
+				// Call engage from API
+				$http.get(api_url+'/analysis/'+analysisData).success(function(data) {
+					$scope.sessionID = data;
+
+					// Set timeout for processing plots
+					setTimeout(function(){
+						$http.get(api_url+'/get/analysis_data/'+analysisData).success(function(data) {
+							$scope.hide_loading_analysis = true;
+							$scope.hide_analysis_results = false;
+							$scope.analysis_data = data['analysis_data'];
+							$scope.disable_analysis_engage = false;
+						});
+					}, 8000);
+				});
 			}
 		}
   };
@@ -271,7 +321,7 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 bridgeControllers.controller('59698Controller', ['$scope', '$http', 
 function($scope, $http) {
 	 $scope.items = [];  
-	 $http.get('http://thebridge.phys.wvu.edu/api/82239/optimal_stat/os_out.json').success(function(data) {
+	 $http.get('http://bridge.nanograv.org/api/7777/optimal_stat/os_out.json').success(function(data) {
 	 	$scope.items = data;
         console.log($scope.items);
 	 });

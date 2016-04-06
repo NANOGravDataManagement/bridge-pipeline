@@ -12,16 +12,16 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#/about">NanoGrav</a>
+			<a class="navbar-brand" href="#/home">NanoGrav</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar">
 			<ul class="nav navbar-nav">
-				<li><a href="#/about">Home <span class="sr-only">(current)</span></a></li>
+				<li><a href="#/introduction">Introduction <span class="sr-only">(current)</span></a></li>
 				<li><a href="#/analysis">Analysis <span class="sr-only">(current)</span></a></li>
 				<li class="active"><a href="#/help">Help <span class="sr-only">(current)</span></a></li>
 				<li><a href="#/mostrecent">Most Recent Stochastic Background Results <span class="sr-only">(current)</span></a></li>
 				<li><a href="#/CW"> CW F-Statistic Results <span class="sr-only">(current)</span></a></li>
-				<li><a href="#/credit">About <span class="sr-only">(current)</span></a></li>
+				<li><a href="#/about">About <span class="sr-only">(current)</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -48,7 +48,7 @@
 			</tr>
 			<tr align = "center">
 			<td height="35">53358.000077.3.000.000.tsum</td>
-			<td height="35">53358' refers to the pulsar file name. '3' refers to the observatory number</td>
+			<td height="35">'53358' refers to the pulsar file name. '77' refers to the scan number and '3' refers to the observatory number</td>
 			</tr>
 			<tr align = "center">
 			<td height="35">420.000</td>
@@ -56,7 +56,7 @@
 			</tr>
 			<tr align = "center">
 			<td height="35">53358.9598798347905</td>
-			<td height="35">measured TOA (Time of Arrival at the observatory)</td>
+			<td height="35">measured TOA (Time of Arrival at the observatory) in <a href="http://www.csgnetwork.com/julianmodifdateconv.html">Modified Julian Date</a></td>
 			</tr>
 			<tr align = "center">
 			<td height="35">1.820</td>
@@ -64,7 +64,7 @@
 			</tr>
 			<tr align = "center">
 			<td height="35">ao</td>
-			<td height="35">radiotelescope used for observation ('ao' = Arecibo Observatory)</td>
+			<td height="35">radio telescope used for observation ('ao' = Arecibo Observatory)</td>
 			</tr>
 			<tr align = "center">
 			<td height="35">-fe</td>
@@ -80,12 +80,12 @@
 			</tr>
 			<tr align = "center">
 			<td height="35">ASP</td>
-			<td height="35"></td>
+			<td height="35">Arecibo Signal Processor</td>
 			</tr>
 			</tr>
 			<tr align = "center">
 			<td height="35">-B</td>
-			<td height="35"></td>
+			<td height="35"> Center frequency</td>
 			</tr>
 			</tr>
 			<tr align = "center">
@@ -95,7 +95,7 @@
 			</tr>
 			<tr align = "center">
 			<td height="35">-bw</td>
-			<td height="35"></td>
+			<td height="35">bandwidth in MHz</td>
 			</tr>
 			</tr>
 			<tr align = "center">
@@ -105,7 +105,7 @@
 			</tr>
 			<tr align = "center">
 			<td height="35">-tobs</td>
-			<td height="35"></td>
+			<td height="35">observation time in seconds</td>
 			</tr>
 			</tr>
 			<tr align = "center">
@@ -119,13 +119,18 @@
 			</tr>
 			</tr>
 			<tr align = "center">
+			<td height="35">-proc</td>
+			<td height="35">Identifier for processing</td>
+			</tr>
+			</tr>
+			<tr align = "center">
 			<td height="35">dfg+12</td>
 			<td height="35"></td>
 			</tr>
 			</tr>
 			<tr align = "center">
 			<td height="35">-chanid</td>
-			<td height="35"></td>
+			<td height="35">channel ID</td>
 			</tr>
 			</tr>
 			<tr align = "center">
@@ -189,7 +194,7 @@
 			</tr>
 			<tr align = "center">
 			<td height="35">DMX</td>
-			<td height="35">Xth Derivative of Dispersion Measure</td>
+			<td height="35">Constant offsets at each epoch</td>
 			<td height="35">cm^(-3)*pc*yr^(-x)</td>
 			</tr>
 			<tr align = "center">
@@ -230,12 +235,12 @@
 			<tr align = "center">
 			<td height="35">&nbsp;RAJ</td>
 			<td height="35">&nbsp;J2000 right ascension&nbsp;</td>
-			<td height="35">&nbsp;hh.mm.ss</td>
+			<td height="35">&nbsp;hh:mm:ss</td>
 			</tr>
 			<tr align = "center">
 			<td height="35">&nbsp;DECJ</td>
 			<td height="35">&nbsp;J2000 declination&nbsp;</td>
-			<td height="35">&nbsp;dd.mm.ss</td>
+			<td height="35">&nbsp;dd:mm:ss</td>
 			</tr>
 			<tr align = "center">
 			<td height="35">PMRA</td>
@@ -275,7 +280,7 @@
 			<tr align = "center">
 			<td height="35">OM</td>
 			<td height="35">Longitude of periastron&nbsp;</td>
-			<td height="35">degree</td>
+			<td height="35">degrees</td>
 			</tr>
 			<tr align = "center">
 			<td height="35">ECC</td>
@@ -289,8 +294,8 @@
 			</tr>
 			<tr align = "center">
 			<td height="35">DMXR</td>
-			<td height="35">time range between two DMXs</td>
-			<td height="35">&nbsp;</td>
+			<td height="35">start and stop MJD ranges for DMX values</td>
+			<td height="35">MJD</td>
 			</tr>
 			<tr align = "center">
 			<td height="35">JUMP</td>

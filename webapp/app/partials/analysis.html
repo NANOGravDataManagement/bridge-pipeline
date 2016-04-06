@@ -9,16 +9,16 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#/about">NanoGrav</a>
+				<a class="navbar-brand" href="#/home">NanoGrav</a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
-					<li><a href="#/about">Home <span class="sr-only">(current)</span></a></li>
+					<li><a href="#/introduction">Introduction <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="#/analysis">Analysis <span class="sr-only">(current)</span></a></li>
 					<li><a href="#/help">Help <span class="sr-only">(current)</span></a></li>
 					<li><a href="#/mostrecent">Most Recent Stochastic Background Results <span class="sr-only">(current)</span>
 					<li><a href="#/CW"> CW F-Statistic Results <span class="sr-only">(current)</span></a></li>
-					<li><a href="#/credit">About <span class="sr-only">(current)</span></a></li>
+					<li><a href="#/about">About <span class="sr-only">(current)</span></a></li>
 					</a></li>
 				</ul>
 			</div>
@@ -32,7 +32,7 @@
 				<!-- create our form -->
     		<form name="analysisForm" ng-submit="processAnalysisForm()" novalidate>
 				<div id="datasetForm" class="col-md-12 scroll" style="height:90%">
-					<div id="DataSelection">
+					<div id="DataSelection" ng-hide="hide_pulsar_list">
 						<h4>Step 1: Select pulsars to analyse </h4>
 
 						<accordion close-others="oneAtATime">
@@ -64,16 +64,13 @@
 							<accordion-heading>PPTA Data<i class="pull-right glyphicon" 
 							ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
 							</i></accordion-heading>
-							<p>Data coming soon!</p>
-					    <!-- <ul class="list-group">
-					    	<li class="list-group-item pulsars" ng-repeat="item in nanograv9">
-								<input type="checkbox" checked="checked" class="box"/> {{item}} </input>
-								</li>
-							</ul> -->
+								<ul class="list-group">
+									<span id="selectallPPTA" ng-click="toggleSeleted(pptadr1,'pptadr1')"><u><b>{{selectText['pptadr1']}}</b></u></span>
+									<li class="list-group-item pulsars" ng-repeat="product in pptadr1">
+									<input type="checkbox" value="{{product.id}}" ng-checked='product.checked' ng-model="product.checked"/> {{product.name}} </input>
+									</li>
+								</ul>
 							</accordion-group>
-						   <!--  <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-						      {{group.list}}
-						    </accordion-group> -->
 					  </accordion>
 					</div>
 					<hr/>
@@ -129,24 +126,25 @@
 						<hr>
 						<h4>Step 2: Perform analysis </h4>
 						<div>
+							<p>Please enter your email address below</p>
 							<input type="email" ng-model="email_text" required></br>
 							<input type="radio" ng-model="analysis" value="OS">  Optimal Statistic<br>
 							<input type="radio" ng-model="analysis" value="Fstat">  CW F-statistic <br>
-							<input type="radio" ng-model="analysis" value="bay" disabled>  Bayesian <br> 
+							<input type="radio" ng-model="analysis" value="BWM">  Burst With Memory <br> 
 						</div>
 					</div>
 				</div>
 
 				<p class="text-right">
 					<button class="btn btn-large btn-primary" id="engage" type="submit" ng-disabled="disable_engage" ng-hide="hide_engage">
-						<span class="glyphicon glyphicon-flash"></span> Engage!</button>
+						<span class="glyphicon glyphicon-flash"></span> Get Residuals!</button>
 				</p>
 			</form>
 			<form  ng-submit="processAnalysis()">
 				<p class="text-right">
 					<!-- <a href="#analysisResults"> -->
-						<button class="btn btn-large btn-primary" id="engage_analysis" type="submit" ng-disabled="disable_analysis_engage" ng-hide="hide_engage_analysis">
-						<span class="glyphicon glyphicon-flash"></span> Engage Analysis!</button>
+						<button class="btn btn-large btn-primary" id="engage_analysis" type="submit" ng-disabled="disable_analysis_engage || analysisForm.$invalid" ng-hide="hide_engage_analysis">
+						<span class="glyphicon glyphicon-flash"></span> Search for Gravitational Waves!</button>
 					<!-- </a> -->
 				</p>
 			</form>	

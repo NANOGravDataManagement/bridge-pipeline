@@ -22,19 +22,19 @@ myApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/CW.html',
     controller: '59698Controller'
   }).
-  when('/credit', {
-    templateUrl: 'partials/credit.html',
+  when('/introduction', {
+    templateUrl: 'partials/introduction.html',
     controller: '59698Controller'
   }).
   when('/about', {
     templateUrl: 'partials/about.html',
     controller: 'AboutController'
   }).
-  when('/test', {
-    templateUrl: 'partials/test.html',
-    controller: 'testCont'
+  when('/home', {
+    templateUrl: 'partials/home.html',
+    controller: 'AboutController'
   }).
   otherwise({
-    redirectTo: '/analysis'
+    redirectTo: '/home'
   });
 }]);
