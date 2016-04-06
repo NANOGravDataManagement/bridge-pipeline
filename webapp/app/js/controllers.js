@@ -66,8 +66,8 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
 
 	$scope.api_url = api_url;
 	// Initialize data with default values
-	$scope.allSelected 	= {"nanograv5": false,"nanograv9": true, "pptadr1": false};
-	$scope.selectText 	= {"nanograv5": "Select All","nanograv9": "Deselect All", "pptadr1": "Select All"};
+	$scope.allSelected 	= {"nanograv5": true,"nanograv9": false, "pptadr1": false};
+	$scope.selectText 	= {"nanograv5": "Deselect All","nanograv9": "Select All", "pptadr1": "Select All"};
 	$scope.formData 	= {"timeFilter":"fullTime", "frequencyFilter":"fullFrequency", "residualPlotting":true, "pulsarTiming":false};
 	$scope.loading				  = true;
 	$scope.hide_plots		 	  = true;
@@ -208,14 +208,20 @@ bridgeControllers.controller('AnalysisController', ['$scope', '$http','$location
    * script to run OODT workflow for selected analysis.
    */
   $scope.processAnalysis = function() {
+<<<<<<< HEAD
 	$scope.analysis_requested = true;
 	$scope.hide_engage_analysis = true;
+=======
+>>>>>>> 4c69e8f7430bdd9b7c2599007be7bd804d2f5f41
 
   	var selectedData5 = $scope.nanograv5.filter(function(data) {
       return data.checked;
     });
 	var selectedData9 = $scope.nanograv9.filter(function(data) {
+<<<<<<< HEAD
       console.log(data.checked);
+=======
+>>>>>>> 4c69e8f7430bdd9b7c2599007be7bd804d2f5f41
       return data.checked;
     });
     var selectedDataPPTA = $scope.pptadr1.filter(function(data) {
@@ -321,7 +327,11 @@ B
 bridgeControllers.controller('59698Controller', ['$scope', '$http', 
 function($scope, $http) {
 	 $scope.items = [];  
+<<<<<<< HEAD
 	 $http.get('http://bridge.nanograv.org/api/7777/optimal_stat/os_out.json').success(function(data) {
+=======
+	 $http.get('http://thebridge.phys.wvu.edu/api/7777/optimal_stat/os_out.json').success(function(data) {
+>>>>>>> 4c69e8f7430bdd9b7c2599007be7bd804d2f5f41
 	 	$scope.items = data;
         console.log($scope.items);
 	 });

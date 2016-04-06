@@ -36,7 +36,7 @@
 						<h4>Step 1: Select pulsars to analyse </h4>
 
 						<accordion close-others="oneAtATime">
-							<accordion-group is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+							<accordion-group>
 							<accordion-heading>5 Year Data<i class="pull-right glyphicon" 
 							ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
 							</i></accordion-heading>
@@ -143,7 +143,7 @@
 			<form  ng-submit="processAnalysis()">
 				<p class="text-right">
 					<!-- <a href="#analysisResults"> -->
-						<button class="btn btn-large btn-primary" id="engage_analysis" type="submit" ng-disabled="disable_analysis_engage || analysisForm.$invalid" ng-hide="hide_engage_analysis">
+						<button class="btn btn-large btn-primary" id="engage_analysis" type="submit" ng-disabled="disable_analysis_engage" ng-hide="hide_engage_analysis">
 						<span class="glyphicon glyphicon-flash"></span> Search for Gravitational Waves!</button>
 					<!-- </a> -->
 				</p>
